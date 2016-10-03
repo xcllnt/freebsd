@@ -31,6 +31,14 @@
 
 #include <sys/queue.h>
 
+#ifndef __unused
+#define	__unused	__attribute__((__unused__))
+#endif
+
+typedef unsigned char u_char;
+typedef unsigned int u_int;
+typedef unsigned short u_short;
+
 struct part {
 	TAILQ_ENTRY(part) link;
 	char	*alias;		/* Partition type alias. */
@@ -89,7 +97,16 @@ ssize_t sparse_write(int, const void *, size_t);
 
 void mkimg_chs(lba_t, u_int, u_int *, u_int *, u_int *);
 
-struct uuid;
-void mkimg_uuid(struct uuid *);
+struct mkimg_uuid {
+	uint32_t	time_low;
+	uint16_t	time_mid;
+	uint16_t	time_hi_and_version;
+	uint8_t		clock_seq_hi_and_reserved;
+	uint8_t		clock_seq_low;
+	uint8_t		node[6];
+};
+typedef struct mkimg_uuid mkimg_uuid_t;
+
+void mkimg_uuid(mkimg_uuid_t *);
 
 #endif /* _MKIMG_MKIMG_H_ */

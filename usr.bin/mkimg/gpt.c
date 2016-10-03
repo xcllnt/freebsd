@@ -33,31 +33,25 @@ __FBSDID("$FreeBSD$");
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <uuid.h>
 
-#include <sys/diskmbr.h>
-#include <sys/gpt.h>
+#include <gpt.h>
+#include <mbr.h>
 
 #include "endian.h"
 #include "image.h"
 #include "mkimg.h"
 #include "scheme.h"
 
-#ifndef GPT_ENT_TYPE_FREEBSD_NANDFS
-#define	GPT_ENT_TYPE_FREEBSD_NANDFS	\
-    {0x74ba7dd9,0xa689,0x11e1,0xbd,0x04,{0x00,0xe0,0x81,0x28,0x6a,0xcf}}
-#endif
-
-static uuid_t gpt_uuid_efi = GPT_ENT_TYPE_EFI;
-static uuid_t gpt_uuid_freebsd = GPT_ENT_TYPE_FREEBSD;
-static uuid_t gpt_uuid_freebsd_boot = GPT_ENT_TYPE_FREEBSD_BOOT;
-static uuid_t gpt_uuid_freebsd_nandfs = GPT_ENT_TYPE_FREEBSD_NANDFS;
-static uuid_t gpt_uuid_freebsd_swap = GPT_ENT_TYPE_FREEBSD_SWAP;
-static uuid_t gpt_uuid_freebsd_ufs = GPT_ENT_TYPE_FREEBSD_UFS;
-static uuid_t gpt_uuid_freebsd_vinum = GPT_ENT_TYPE_FREEBSD_VINUM;
-static uuid_t gpt_uuid_freebsd_zfs = GPT_ENT_TYPE_FREEBSD_ZFS;
-static uuid_t gpt_uuid_mbr = GPT_ENT_TYPE_MBR;
-static uuid_t gpt_uuid_ms_basic_data = GPT_ENT_TYPE_MS_BASIC_DATA;
+static mkimg_uuid_t gpt_uuid_efi = GPT_ENT_TYPE_EFI;
+static mkimg_uuid_t gpt_uuid_freebsd = GPT_ENT_TYPE_FREEBSD;
+static mkimg_uuid_t gpt_uuid_freebsd_boot = GPT_ENT_TYPE_FREEBSD_BOOT;
+static mkimg_uuid_t gpt_uuid_freebsd_nandfs = GPT_ENT_TYPE_FREEBSD_NANDFS;
+static mkimg_uuid_t gpt_uuid_freebsd_swap = GPT_ENT_TYPE_FREEBSD_SWAP;
+static mkimg_uuid_t gpt_uuid_freebsd_ufs = GPT_ENT_TYPE_FREEBSD_UFS;
+static mkimg_uuid_t gpt_uuid_freebsd_vinum = GPT_ENT_TYPE_FREEBSD_VINUM;
+static mkimg_uuid_t gpt_uuid_freebsd_zfs = GPT_ENT_TYPE_FREEBSD_ZFS;
+static mkimg_uuid_t gpt_uuid_mbr = GPT_ENT_TYPE_MBR;
+static mkimg_uuid_t gpt_uuid_ms_basic_data = GPT_ENT_TYPE_MS_BASIC_DATA;
 
 static struct mkimg_alias gpt_aliases[] = {
     {	ALIAS_EFI, ALIAS_PTR2TYPE(&gpt_uuid_efi) },
@@ -132,7 +126,7 @@ crc32(const void *buf, size_t sz)
 }
 
 static void
-gpt_uuid_enc(void *buf, const uuid_t *uuid)
+gpt_uuid_enc(void *buf, const mkimg_uuid_t *uuid)
 {
 	uint8_t *p = buf;
 	int i;
@@ -142,7 +136,7 @@ gpt_uuid_enc(void *buf, const uuid_t *uuid)
 	le16enc(p + 6, uuid->time_hi_and_version);
 	p[8] = uuid->clock_seq_hi_and_reserved;
 	p[9] = uuid->clock_seq_low;
-	for (i = 0; i < _UUID_NODE_LEN; i++)
+	for (i = 0; i < 6; i++)
 		p[10 + i] = uuid->node[i];
 }
 
@@ -199,7 +193,7 @@ gpt_write_pmbr(lba_t blks, void *bootcode)
 static struct gpt_ent *
 gpt_mktbl(u_int tblsz)
 {
-	uuid_t uuid;
+	mkimg_uuid_t uuid;
 	struct gpt_ent *tbl, *ent;
 	struct part *part;
 	int c, idx;
@@ -243,7 +237,7 @@ gpt_write_hdr(struct gpt_hdr *hdr, uint64_t self, uint64_t alt, uint64_t tbl)
 static int
 gpt_write(lba_t imgsz, void *bootcode)
 {
-	uuid_t uuid;
+	mkimg_uuid_t uuid;
 	struct gpt_ent *tbl;
 	struct gpt_hdr *hdr;
 	uint32_t crc;

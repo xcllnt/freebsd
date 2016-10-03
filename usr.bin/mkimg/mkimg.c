@@ -28,12 +28,10 @@
 __FBSDID("$FreeBSD$");
 
 #include <sys/stat.h>
-#include <sys/uuid.h>
 #include <errno.h>
 #include <err.h>
 #include <fcntl.h>
 #include <getopt.h>
-#include <libutil.h>
 #include <limits.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -46,6 +44,8 @@ __FBSDID("$FreeBSD$");
 #include "format.h"
 #include "mkimg.h"
 #include "scheme.h"
+
+extern int expand_number(const char *buf, uint64_t *num);
 
 #define	LONGOPT_FORMATS	0x01000001
 #define	LONGOPT_SCHEMES	0x01000002
@@ -375,19 +375,19 @@ mkimg_chs(lba_t lba, u_int maxcyl, u_int *cylp, u_int *hdp, u_int *secp)
 }
 
 void
-mkimg_uuid(struct uuid *uuid)
+mkimg_uuid(mkimg_uuid_t *uuid)
 {
-	static uint8_t gen[sizeof(struct uuid)];
+	static uint8_t gen[sizeof(mkimg_uuid_t)];
 	u_int i;
 
 	if (!unit_testing) {
-		uuidgen(uuid, 1);
+		uuidgen((void *)uuid, 1);
 		return;
 	}
 
 	for (i = 0; i < sizeof(gen); i++)
 		gen[i]++;
-	memcpy(uuid, gen, sizeof(uuid_t));
+	memcpy(uuid, gen, sizeof(*uuid));
 }
 
 static int
@@ -496,7 +496,7 @@ main(int argc, char *argv[])
 				err(EX_UNAVAILABLE, "%s", optarg);
 			break;
 		case 'c':	/* CAPACITY */
-			error = parse_uint64(&capacity, 1, OFF_MAX, optarg);
+			error = parse_uint64(&capacity, 1, INT64_MAX, optarg);
 			if (error)
 				errc(EX_DATAERR, error, "capacity in bytes");
 			break;

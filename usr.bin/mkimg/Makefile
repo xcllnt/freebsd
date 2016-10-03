@@ -11,6 +11,8 @@ mkimg.o: Makefile
 
 CFLAGS+=-DMKIMG_VERSION=${MKIMG_VERSION}
 CFLAGS+=-DSPARSE_WRITE
+CFLAGS+=-D_GNU_SOURCE '-D__FBSDID(x)='
+CFLAGS+=-I${.CURDIR:H:H}/sys/sys/disk
 
 # List of formats to support
 SRCS+= \
@@ -33,7 +35,7 @@ BINDIR?=/usr/bin
 
 LIBADD=	util
 
-WARNS?=	6
+WARNS?=	0
 
 .if ${MK_TESTS} != "no"
 SUBDIR+= tests
