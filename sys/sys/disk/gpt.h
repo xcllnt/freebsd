@@ -32,19 +32,24 @@
 /*
  * Applications can define GPT_UUID_TYPE if they want the GPT structures
  * to use a particular type definition for UUIDs/GUIDs.  This header uses
- * a generic definition otherwise.
+ * a generic (DCE 1.1 compatible) definition otherwise.
  */
 #ifndef GPT_UUID_TYPE
-union gpt_uuid {
-	uint64_t	uint8[2];
-	uint32_t	uint4[4];
-	uint16_t	uint2[8];
-	uint8_t		uint1[16];
+struct gpt_uuid {
+	uint32_t	time_low;
+	uint16_t	time_mid;
+	uint16_t	time_hi_and_version;
+	uint8_t		clock_seq_hi_and_reserved;
+	uint8_t		clock_seq_low;
+	uint8_t		node[6];
 };
-#define	GPT_UUID_TYPE	union gpt_uuid
+#define	GPT_UUID_TYPE	struct gpt_uuid
 #endif /* !GPT_UUID_TYPE */
+
+typedef GPT_UUID_TYPE gpt_uuid_t;
+
 #ifdef CTASSERT
-CTASSERT(sizeof(GPT_UUID_TYPE) == 16);
+CTASSERT(sizeof(gpt_uuid_t) == 16);
 #endif
 
 struct gpt_hdr {
@@ -59,7 +64,7 @@ struct gpt_hdr {
 	uint64_t	hdr_lba_alt;
 	uint64_t	hdr_lba_start;
 	uint64_t	hdr_lba_end;
-	GPT_UUID_TYPE	hdr_uuid;
+	gpt_uuid_t	hdr_uuid;
 	uint64_t	hdr_lba_table;
 	uint32_t	hdr_entries;
 	uint32_t	hdr_entsz;
@@ -78,8 +83,8 @@ CTASSERT(offsetof(struct gpt_hdr, padding) == 92);
 #endif
 
 struct gpt_ent {
-	GPT_UUID_TYPE	ent_type;
-	GPT_UUID_TYPE	ent_uuid;
+	gpt_uuid_t	ent_type;
+	gpt_uuid_t	ent_uuid;
 	uint64_t	ent_lba_start;
 	uint64_t	ent_lba_end;
 	uint64_t	ent_attr;

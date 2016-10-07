@@ -47,8 +47,10 @@
  * The label is in block 0 or 1, possibly offset from the beginning
  * to leave room for a bootstrap, etc.
  * XXX these should be defined per controller (or drive) elsewhere, not here!
- * XXX in actuality it can't even be per controller or driver. It should be
- * fixed across storage hardware and CPU architectures.
+ * XXX in actuality it can't even be per controller or drive. It should be
+ * constant/fixed across storage hardware and CPU architectures. Disks can
+ * travel from one machine to another and a label created on one machine
+ * should be detectable and understood by the other.
  */
 #define LABELSECTOR	1			/* sector containing label */
 #define LABELOFFSET	0			/* offset of label in sector */
