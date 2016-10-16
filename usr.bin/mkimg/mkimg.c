@@ -374,22 +374,6 @@ mkimg_chs(lba_t lba, u_int maxcyl, u_int *cylp, u_int *hdp, u_int *secp)
 	*secp = sec;
 }
 
-void
-mkimg_uuid(mkimg_uuid_t *uuid)
-{
-	static uint8_t gen[sizeof(mkimg_uuid_t)];
-	u_int i;
-
-	if (!unit_testing) {
-		uuidgen((void *)uuid, 1);
-		return;
-	}
-
-	for (i = 0; i < sizeof(gen); i++)
-		gen[i]++;
-	memcpy(uuid, gen, sizeof(*uuid));
-}
-
 static int
 capacity_resize(lba_t end)
 {

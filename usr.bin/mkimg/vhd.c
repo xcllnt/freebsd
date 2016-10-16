@@ -200,21 +200,6 @@ vhd_timestamp(void)
 }
 
 static void
-vhd_uuid_enc(void *buf, const mkimg_uuid_t *uuid)
-{
-	uint8_t *p = buf;
-	int i;
-
-	be32enc(p, uuid->time_low);
-	be16enc(p + 4, uuid->time_mid);
-	be16enc(p + 6, uuid->time_hi_and_version);
-	p[8] = uuid->clock_seq_hi_and_reserved;
-	p[9] = uuid->clock_seq_low;
-	for (i = 0; i < 6; i++)
-		p[10 + i] = uuid->node[i];
-}
-
-static void
 vhd_make_footer(struct vhd_footer *footer, uint64_t image_size,
     uint32_t disk_type, uint64_t data_offset)
 {
@@ -235,7 +220,7 @@ vhd_make_footer(struct vhd_footer *footer, uint64_t image_size,
 	be16enc(&footer->geometry.cylinders, footer->geometry.cylinders);
 	be32enc(&footer->disk_type, disk_type);
 	mkimg_uuid(&id);
-	vhd_uuid_enc(&footer->id, &id);
+	mkimg_uuid_enc(&footer->id, &id);
 	be32enc(&footer->checksum, vhd_checksum(footer, sizeof(*footer)));
 }
 

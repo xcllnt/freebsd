@@ -125,21 +125,6 @@ crc32(const void *buf, size_t sz)
 	return (crc ^ ~0U);
 }
 
-static void
-gpt_uuid_enc(void *buf, const mkimg_uuid_t *uuid)
-{
-	uint8_t *p = buf;
-	int i;
-
-	le32enc(p, uuid->time_low);
-	le16enc(p + 4, uuid->time_mid);
-	le16enc(p + 6, uuid->time_hi_and_version);
-	p[8] = uuid->clock_seq_hi_and_reserved;
-	p[9] = uuid->clock_seq_low;
-	for (i = 0; i < 6; i++)
-		p[10 + i] = uuid->node[i];
-}
-
 static u_int
 gpt_tblsz(void)
 {
@@ -204,9 +189,9 @@ gpt_mktbl(u_int tblsz)
 
 	TAILQ_FOREACH(part, &partlist, link) {
 		ent = tbl + part->index;
-		gpt_uuid_enc(&ent->ent_type, ALIAS_TYPE2PTR(part->type));
+		mkimg_uuid_enc(&ent->ent_type, ALIAS_TYPE2PTR(part->type));
 		mkimg_uuid(&uuid);
-		gpt_uuid_enc(&ent->ent_uuid, &uuid);
+		mkimg_uuid_enc(&ent->ent_uuid, &uuid);
 		le64enc(&ent->ent_lba_start, part->block);
 		le64enc(&ent->ent_lba_end, part->block + part->size - 1);
 		if (part->label != NULL) {
@@ -274,7 +259,7 @@ gpt_write(lba_t imgsz, void *bootcode)
 	le64enc(&hdr->hdr_lba_start, 2 + tblsz);
 	le64enc(&hdr->hdr_lba_end, imgsz - tblsz - 2);
 	mkimg_uuid(&uuid);
-	gpt_uuid_enc(&hdr->hdr_uuid, &uuid);
+	mkimg_uuid_enc(&hdr->hdr_uuid, &uuid);
 	le32enc(&hdr->hdr_entries, nparts);
 	le32enc(&hdr->hdr_entsz, sizeof(struct gpt_ent));
 	crc = crc32(tbl, nparts * sizeof(struct gpt_ent));

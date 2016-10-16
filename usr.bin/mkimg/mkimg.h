@@ -108,5 +108,6 @@ struct mkimg_uuid {
 typedef struct mkimg_uuid mkimg_uuid_t;
 
 void mkimg_uuid(mkimg_uuid_t *);
+void mkimg_uuid_enc(void *, const mkimg_uuid_t *);
 
 #endif /* _MKIMG_MKIMG_H_ */
