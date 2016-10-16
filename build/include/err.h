@@ -1,5 +1,6 @@
 #include_next <err.h>
 
+#ifdef __linux__
 #include <errno.h>
 #include <stdarg.h>
 
@@ -14,3 +15,4 @@ errc(int eval, int code, const char *fmt, ...)
 	va_end(ap);
 	/* NOTREACHED */
 }
+#endif	/* __linux__ */
