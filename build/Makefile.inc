@@ -1,0 +1,5 @@
+# $FreeBSD$
+
+CFLAGS+=-D_GNU_SOURCE '-D__FBSDID(x)='
+
+WARNS=0
