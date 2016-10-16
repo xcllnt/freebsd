@@ -35,10 +35,12 @@ __FBSDID("$FreeBSD$");
 #include "image.h"
 #include "mkimg.h"
 
+static void osdep_uuidgen(mkimg_uuid_t *);
+
 #ifdef __APPLE__
 #include <uuid/uuid.h>
 
-void
+static void
 osdep_uuidgen(mkimg_uuid_t *uuid)
 {
 
@@ -49,7 +51,7 @@ osdep_uuidgen(mkimg_uuid_t *uuid)
 #ifdef __FreeBSD__
 #include <sys/uuid.h>
 
-void
+static void
 osdep_uuidgen(mkimg_uuid_t *uuid)
 {
 
@@ -61,7 +63,7 @@ osdep_uuidgen(mkimg_uuid_t *uuid)
 #include <stdlib.h>
 #include <time.h>
 
-void
+static void
 osdep_uuidgen(mkimg_uuid_t *uuid)
 {
 	struct timespec tp;

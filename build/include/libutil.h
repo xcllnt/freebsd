@@ -1,5 +1,3 @@
-/* $FreeBSD$ */
-
 #ifndef _LIBUTIL_H_
 #define	_LIBUTIL_H_
 
