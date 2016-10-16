@@ -1,5 +1,7 @@
 # $FreeBSD$
 
+BUILDTOP:=${.PARSEDIR:tA}
+
 CFLAGS+=-D_GNU_SOURCE '-D__FBSDID(x)='
 
 CFLAGS+=-I${BUILDTOP}/include

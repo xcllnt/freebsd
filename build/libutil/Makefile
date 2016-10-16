@@ -1,8 +1,6 @@
 # $FreeBSD$
 
-BUILDTOP=${.CURDIR:H}
-SRCDIR=	${BUILDTOP:H}/lib/libutil
-.PATH:	${SRCDIR}
+.PATH:	${SRCTOP}/lib/libutil
 
 LIB=	util
 SRCS=	expand_number.c

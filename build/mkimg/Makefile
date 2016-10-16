@@ -1,7 +1,6 @@
 # $FreeBSD$
 
-BUILDTOP=${.CURDIR:H}
-SRCDIR=	${BUILDTOP:H}/usr.bin/mkimg
+SRCDIR=	${SRCTOP}/usr.bin/mkimg
 .PATH:	${SRCDIR}
 
 LDADD+= -L${BUILDTOP}/libutil
