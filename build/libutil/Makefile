@@ -1,6 +1,7 @@
 # $FreeBSD$
 
-SRCDIR=	${.CURDIR:H:H}/lib/libutil
+BUILDTOP=${.CURDIR:H}
+SRCDIR=	${BUILDTOP:H}/lib/libutil
 .PATH:	${SRCDIR}
 
 LIB=	util
