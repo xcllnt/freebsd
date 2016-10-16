@@ -57,6 +57,40 @@ osdep_uuidgen(mkimg_uuid_t *uuid)
 }
 #endif	/* __FreeBSD__ */
 
+#ifdef __linux__
+#include <stdlib.h>
+#include <time.h>
+
+void
+osdep_uuidgen(mkimg_uuid_t *uuid)
+{
+	struct timespec tp;
+	uint64_t time = 0x01B21DD213814000LL;
+	u_int i;
+	uint16_t seq;
+
+	if (clock_gettime(CLOCK_REALTIME, &tp) == -1)
+		abort();
+
+	time += (uint64_t)tp.tv_sec * 10000000LL;
+	time += tp.tv_nsec / 100;
+
+	uuid->time_low = (uint32_t)time;
+	uuid->time_mid = (uint16_t)(time >> 32);
+	uuid->time_hi_and_version = (uint16_t)(time >> 48) & 0xfff;
+	uuid->time_hi_and_version |= 1 << 12;
+
+	seq = random();
+
+	uuid->clock_seq_hi_and_reserved = (uint8_t)(seq >> 8) & 0x3f;
+	uuid->clock_seq_low = (uint8_t)seq;
+
+	for (i = 0; i < 6; i++)
+		uuid->node[i] = (uint8_t)random();
+	uuid->node[0] |= 0x01;
+}
+#endif	/* __linux__ */
+
 void
 mkimg_uuid(mkimg_uuid_t *uuid)
 {
