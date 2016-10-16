@@ -32,6 +32,7 @@ __FBSDID("$FreeBSD$");
 #include <err.h>
 #include <fcntl.h>
 #include <getopt.h>
+#include <libutil.h>
 #include <limits.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -44,8 +45,6 @@ __FBSDID("$FreeBSD$");
 #include "format.h"
 #include "mkimg.h"
 #include "scheme.h"
-
-extern int expand_number(const char *buf, uint64_t *num);
 
 #define	LONGOPT_FORMATS	0x01000001
 #define	LONGOPT_SCHEMES	0x01000002

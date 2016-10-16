@@ -2,4 +2,9 @@
 
 CFLAGS+=-D_GNU_SOURCE '-D__FBSDID(x)='
 
+CFLAGS+=-I${.CURDIR:H}/libutil
+LDADD+=	-L${.CURDIR:H}/libutil
+
 WARNS=0
+
+TSORTFLAGS=

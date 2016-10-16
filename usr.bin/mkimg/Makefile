@@ -34,7 +34,7 @@ BINDIR?=/usr/bin
 
 LIBADD=	util
 
-WARNS?=	0
+WARNS?=	6
 
 .if ${MK_TESTS} != "no"
 SUBDIR+= tests
