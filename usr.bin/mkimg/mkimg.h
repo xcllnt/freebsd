@@ -30,6 +30,7 @@
 #define	_MKIMG_MKIMG_H_
 
 #include <sys/queue.h>
+#include <sys/types.h>
 
 #ifndef __unused
 #define	__unused	__attribute__((__unused__))
