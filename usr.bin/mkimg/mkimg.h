@@ -32,14 +32,6 @@
 #include <sys/queue.h>
 #include <sys/types.h>
 
-#ifndef __unused
-#define	__unused	__attribute__((__unused__))
-#endif
-
-typedef unsigned char u_char;
-typedef unsigned int u_int;
-typedef unsigned short u_short;
-
 struct part {
 	TAILQ_ENTRY(part) link;
 	char	*alias;		/* Partition type alias. */
