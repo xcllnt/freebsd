@@ -3,6 +3,8 @@
 #ifndef _STDLIB_H_COMPAT_
 #define	_STDLIB_H_COMPAT_
 
+#define	EXIT_FAILURE	1
+
 #ifdef __linux__
 extern char *program_invocation_short_name;
 static inline const char *

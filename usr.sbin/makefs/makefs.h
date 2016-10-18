@@ -42,6 +42,7 @@
 
 #include <sys/stat.h>
 #include <err.h>
+#include <stdint.h>
 
 /*
  * fsnode -
