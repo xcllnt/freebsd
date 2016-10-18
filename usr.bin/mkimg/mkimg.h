@@ -30,14 +30,7 @@
 #define	_MKIMG_MKIMG_H_
 
 #include <sys/queue.h>
-
-#ifndef __unused
-#define	__unused	__attribute__((__unused__))
-#endif
-
-typedef unsigned char u_char;
-typedef unsigned int u_int;
-typedef unsigned short u_short;
+#include <sys/types.h>
 
 struct part {
 	TAILQ_ENTRY(part) link;
