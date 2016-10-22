@@ -4,6 +4,10 @@
 #define	__FBSDID(x)	struct __hack
 #endif
 
+#ifndef __RCSID
+#define	__RCSID(x)	struct __hack
+#endif
+
 #ifndef __offsetof
 #define	__offsetof(type, field)	 __builtin_offsetof(type, field)
 #endif
