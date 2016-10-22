@@ -48,6 +48,10 @@ __FBSDID("$FreeBSD$");
 
 #include "makefs.h"
 
+#ifndef ENOATTR
+#define	ENOATTR	ENOMSG
+#endif
+
 #define	IS_DOT(nm)	((nm)[0] == '.' && (nm)[1] == '\0')
 #define	IS_DOTDOT(nm)	((nm)[0] == '.' && (nm)[1] == '.' && (nm)[2] == '\0')
 

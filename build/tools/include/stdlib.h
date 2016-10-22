@@ -13,6 +13,13 @@ getprogname(void)
 
 	return (program_invocation_short_name);
 }
+
+static inline void
+setprogname(char *name)
+{
+
+	program_invocation_short_name = name;
+}
 #endif	/* __linux__ */
 
 #endif	/* !_STDLIB_H_COMPAT_ */

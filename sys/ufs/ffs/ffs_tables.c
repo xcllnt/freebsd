@@ -33,6 +33,11 @@
 __FBSDID("$FreeBSD$");
 
 #include <sys/param.h>
+
+#ifndef _KERNEL
+#include <stdint.h>
+#endif
+
 #include <ufs/ufs/dinode.h>
 #include <ufs/ffs/fs.h>
 
