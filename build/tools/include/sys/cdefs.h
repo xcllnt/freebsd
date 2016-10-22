@@ -1,5 +1,9 @@
 #include_next <sys/cdefs.h>
 
+#ifndef __FBSDID
+#define	__FBSDID(x)	struct __hack
+#endif
+
 #ifndef __offsetof
 #define	__offsetof(type, field)	 __builtin_offsetof(type, field)
 #endif
