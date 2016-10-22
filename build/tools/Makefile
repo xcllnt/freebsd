@@ -1,6 +1,7 @@
 # $FreeBSD$
 
 SUBDIR= \
+	libnetbsd \
 	libutil \
 	.WAIT \
 	mkimg

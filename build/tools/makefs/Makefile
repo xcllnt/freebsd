@@ -10,6 +10,9 @@ ${.OBJDIR}/ufs:
 
 CFLAGS+=-I${.OBJDIR}
 
+LDADD+= -L${BUILDTOP}/libnetbsd
+LDADD+= -L${BUILDTOP}/libutil
+
 BUILDTOOL=yes
 
 MK_TESTS=no

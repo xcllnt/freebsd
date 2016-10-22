@@ -5,4 +5,5 @@
 LIB=	util
 SRCS=	expand_number.c
 
+INTERNALLIB=
 .include <bsd.lib.mk>
