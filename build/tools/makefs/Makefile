@@ -12,4 +12,5 @@ CFLAGS+=-I${.OBJDIR}
 
 BUILDTOOL=yes
 
+MK_TESTS=no
 .include "${SRCDIR}/Makefile"

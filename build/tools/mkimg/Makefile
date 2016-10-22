@@ -5,4 +5,5 @@ SRCDIR=	${SRCTOP}/usr.bin/mkimg
 
 LDADD+= -L${BUILDTOP}/libutil
 
+MK_TESTS=no
 .include "${SRCDIR}/Makefile"
