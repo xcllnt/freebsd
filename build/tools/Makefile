@@ -3,7 +3,9 @@
 SUBDIR= \
 	libutil \
 	.WAIT \
-	makefs \
 	mkimg
+
+# Under development
+SUBDIR+= makefs
 
 .include <bsd.subdir.mk>
