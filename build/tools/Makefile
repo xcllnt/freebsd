@@ -1,6 +1,7 @@
 # $FreeBSD$
 
 SUBDIR= \
+	libfreebsd \
 	libnetbsd \
 	libsbuf \
 	libutil \

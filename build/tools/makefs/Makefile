@@ -10,6 +10,8 @@ ${.OBJDIR}/ufs:
 
 CFLAGS+=-I${.OBJDIR}
 
+LPADD+= -l${BUILDTOP}/libfreebsd/libfreebsd.a
+
 LDADD+= -L${BUILDTOP}/libnetbsd
 LDADD+= -L${BUILDTOP}/libsbuf
 LDADD+= -L${BUILDTOP}/libutil
