@@ -2,13 +2,12 @@
 #define	_LIBUTIL_H_
 
 #include <stdint.h>
+#include <stdio.h>
 
 int	expand_number(const char *_buf, uint64_t *_num);
 
-#ifdef FILE
 char	*fparseln(FILE *fp, size_t *size, size_t *lineno, const char str[3],
-    int flags)
-#endif
+    int flags);
 
 #define	FPARSELN_UNESCESC	0x01
 #define	FPARSELN_UNESCCONT	0x02
