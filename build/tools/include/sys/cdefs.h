@@ -19,3 +19,7 @@
 #ifndef __unused
 #define	__unused		__attribute__((__unused__))
 #endif
+
+#ifndef CTASSERT
+#define	CTASSERT(x)	struct __hack
+#endif
