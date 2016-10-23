@@ -2,6 +2,7 @@
 
 SUBDIR= \
 	libnetbsd \
+	libsbuf \
 	libutil \
 	.WAIT \
 	mkimg

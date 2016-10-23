@@ -11,6 +11,7 @@ ${.OBJDIR}/ufs:
 CFLAGS+=-I${.OBJDIR}
 
 LDADD+= -L${BUILDTOP}/libnetbsd
+LDADD+= -L${BUILDTOP}/libsbuf
 LDADD+= -L${BUILDTOP}/libutil
 
 BUILDTOOL=yes
