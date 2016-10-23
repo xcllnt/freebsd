@@ -10,13 +10,12 @@ ${.OBJDIR}/ufs:
 
 CFLAGS+=-I${.OBJDIR}
 
-LDADD+= -L${BUILDTOP}/libnetbsd
-LDADD+= -L${BUILDTOP}/libsbuf
-LDADD+= -L${BUILDTOP}/libutil
-
-LDADD+= ${BUILDTOP}/libfreebsd/libfreebsd.a
+LDADD+= -L${.OBJDIR:H}/libsbuf
+LDADD+= -L${.OBJDIR:H}/libutil
 
 BUILDTOOL=yes
 
 MK_TESTS=no
 .include "${SRCDIR}/Makefile"
+
+LDADD+= ${.OBJDIR:H}/libfreebsd/libfreebsd.a
