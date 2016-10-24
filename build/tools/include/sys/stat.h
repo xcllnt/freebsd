@@ -10,9 +10,9 @@
 #else
 #define	st_flags	__glibc_reserved4
 #endif
-#endif	/* __linux__ */
 
-#define S_ISTXT 0001000
+#define S_ISTXT		0001000
+#endif	/* __linux__ */
 
 /*
  * Definitions of flags stored in file flags word.
