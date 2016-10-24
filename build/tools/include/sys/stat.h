@@ -12,6 +12,8 @@
 #endif
 #endif	/* __linux__ */
 
+#define S_ISTXT 0001000
+
 /*
  * Definitions of flags stored in file flags word.
  *
