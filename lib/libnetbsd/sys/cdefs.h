@@ -41,7 +41,7 @@
 #else
 #define __dead
 #endif
-#endif	/* !__dead */
+#endif /* !__dead */
 
 /*
  * The __CONCAT macro is used to concatenate parts of symbol names, e.g.
