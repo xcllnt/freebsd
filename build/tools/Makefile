@@ -6,6 +6,7 @@ SUBDIR= \
 	libsbuf \
 	libutil \
 	.WAIT \
+	file2c \
 	makefs \
 	mkimg
 
