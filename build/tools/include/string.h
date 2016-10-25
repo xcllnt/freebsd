@@ -5,6 +5,18 @@
 
 #ifdef __linux__
 static inline size_t
+strlcat(char *dst, const char *src, size_t sz)
+{
+	size_t len;
+
+	len = strlen(dst);
+	if (sz > len)
+		strncat(dst, src, sz - len - 1);
+	len += strlen(src);
+	return (len);
+}
+
+static inline size_t
 strlcpy(char *dst, const char *src, size_t sz)
 {
 
