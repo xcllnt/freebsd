@@ -6,9 +6,10 @@ SUBDIR= \
 	libsbuf \
 	libutil \
 	.WAIT \
+	makefs \
 	mkimg
 
 # Under development
-SUBDIR+= makefs
+SUBDIR+=
 
 .include <bsd.subdir.mk>
