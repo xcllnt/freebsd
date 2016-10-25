@@ -1,9 +1,10 @@
 # $FreeBSD$
 
 LIB=	freebsd
+SRCS+=	fgetln.c setmode.c
 
 .PATH:	${SRCTOP}/lib/libc/gen
-SRCS+=	setmode.c strtofflags.c
+SRCS+=	strtofflags.c
 
 .PATH:	${SRCTOP}/contrib/libc-pwcache
 SRCS+=	pwcache.c
