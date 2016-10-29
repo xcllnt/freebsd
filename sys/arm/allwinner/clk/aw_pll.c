@@ -47,11 +47,14 @@ __FBSDID("$FreeBSD$");
 
 #include <dev/extres/clk/clk.h>
 
-#include <dt-bindings/clock/sun4i-a10-pll2.h>
-
 #include <arm/allwinner/aw_machdep.h>
 
 #include "clkdev_if.h"
+
+#define	SUN4I_A10_PLL2_1X		0
+#define	SUN4I_A10_PLL2_2X		1
+#define	SUN4I_A10_PLL2_4X		2
+#define	SUN4I_A10_PLL2_8X		3
 
 #define	AW_PLL_ENABLE			(1 << 31)
 
@@ -308,15 +311,6 @@ struct aw_pll_funcs {
 #define	PLL_WRITE(sc, val)	CLKDEV_WRITE_4((sc)->clkdev, (sc)->reg, (val))
 #define	DEVICE_LOCK(sc)		CLKDEV_DEVICE_LOCK((sc)->clkdev)
 #define	DEVICE_UNLOCK(sc)	CLKDEV_DEVICE_UNLOCK((sc)->clkdev)
-
-static int
-a10_pll1_init(device_t dev, bus_addr_t reg, struct clknode_init_def *def)
-{
-	/* Allow changing PLL frequency while enabled */
-	def->flags = CLK_NODE_GLITCH_FREE;
-
-	return (0);
-}
 
 static int
 a10_pll1_set_freq(struct aw_pll_sc *sc, uint64_t fin, uint64_t *fout,
@@ -999,7 +993,7 @@ a83t_pllcpux_set_freq(struct aw_pll_sc *sc, uint64_t fin, uint64_t *fout,
 	}
 
 static struct aw_pll_funcs aw_pll_func[] = {
-	PLL(AWPLL_A10_PLL1, a10_pll1_recalc, a10_pll1_set_freq, a10_pll1_init),
+	PLL(AWPLL_A10_PLL1, a10_pll1_recalc, a10_pll1_set_freq, NULL),
 	PLL(AWPLL_A10_PLL2, a10_pll2_recalc, a10_pll2_set_freq, NULL),
 	PLL(AWPLL_A10_PLL3, a10_pll3_recalc, a10_pll3_set_freq, a10_pll3_init),
 	PLL(AWPLL_A10_PLL5, a10_pll5_recalc, NULL, NULL),
