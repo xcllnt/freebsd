@@ -3,7 +3,7 @@
 SRCDIR=	${SRCTOP}/usr.bin/mkimg
 .PATH:	${SRCDIR}
 
-LDADD+= -L${BUILDTOP}/libutil
+LDADD+= -L${.OBJDIR:H}/libutil
 
 MK_TESTS=no
 .include "${SRCDIR}/Makefile"
