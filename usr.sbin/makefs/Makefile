@@ -20,9 +20,6 @@ WARNS?=	2
 .include "${SRCDIR}/ffs/Makefile.inc"
 
 CFLAGS+=-DHAVE_STRUCT_STAT_ST_FLAGS=1
-.if ${BUILDTOOL:Uno} != "yes"
-CFLAGS+=-DHAVE_STRUCT_STAT_ST_GEN=1
-.endif
 
 .PATH: ${SRCTOP}/contrib/mtree
 CFLAGS+=-I${SRCTOP}/contrib/mtree

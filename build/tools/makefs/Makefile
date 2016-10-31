@@ -13,8 +13,6 @@ CFLAGS+=-I${.OBJDIR}
 LDADD+= -L${.OBJDIR:H}/libsbuf
 LDADD+= -L${.OBJDIR:H}/libutil
 
-BUILDTOOL=yes
-
 MK_TESTS=no
 .include "${SRCDIR}/Makefile"
 
