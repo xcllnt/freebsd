@@ -1,0 +1,8 @@
+# $FreeBSD$
+
+SRCDIR=	${SRCTOP}/lib/clang/${.CURDIR:T}
+
+TOOLS_OBJTOP=${.OBJDIR:H:H}
+.include "../Makefile.inc"
+
+.include "${SRCDIR}/Makefile"
