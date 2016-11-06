@@ -1,17 +1,26 @@
 # $FreeBSD$
 
-TOOLSTOP:=${.PARSEDIR:tA}
+TOOLS_OBJTOP?=	${.OBJDIR:H}
+TOOLS_SRCTOP:=	${.PARSEDIR:tA}
 
-CFLAGS+=-D_GNU_SOURCE
+HOST_OS!=	uname -s
 
-CFLAGS+=-I${TOOLSTOP}/include
+CFLAGS+=	-I${TOOLS_SRCTOP}/include
 
-WARNS=0
+LLVM_TOOLS_CFLAGS= -I${TOOLS_SRCTOP}/include/${HOST_OS}
 
-LIBNETBSDDIR=${.OBJDIR:H}/libnetbsd
+.if ${HOST_OS} == "Linux"
+CFLAGS+=	-D_GNU_SOURCE
+.endif
+
+LIBNETBSDDIR=	${TOOLS_OBJTOP}/libnetbsd
+MK_DEBUG_FILES=	no
+WARNS=		0
 
 ARFLAGS=	-cr
 RANLIBFLAGS=
 TSORTFLAGS=
 
-MK_DEBUG_FILES=no
+CLANG_TBLGEN=	${TOOLS_OBJTOP}/clang-tblgen/clang-tblgen
+FILE2C=		${TOOLS_OBJTOP}/file2c/file2c
+LLVM_TBLGEN=	${TOOLS_OBJTOP}/llvm-tblgen/llvm-tblgen
