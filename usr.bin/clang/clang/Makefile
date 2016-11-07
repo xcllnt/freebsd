@@ -9,14 +9,6 @@ SRCS=	cc1_main.cpp \
 	cc1as_main.cpp \
 	driver.cpp
 
-.if ${MK_SHARED_TOOLCHAIN} == "no"
-NO_SHARED?= yes
-
-.if ${MACHINE_CPUARCH} == "arm"
-CFLAGS+= -mlong-calls
-.endif
-.endif
-
 LINKS=	${BINDIR}/clang ${BINDIR}/clang++ \
 	${BINDIR}/clang ${BINDIR}/clang-cpp
 MLINKS=	clang.1 clang++.1 \
