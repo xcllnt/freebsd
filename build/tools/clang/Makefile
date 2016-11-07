@@ -6,3 +6,7 @@ SRCDIR=	${SRCTOP}/usr.bin/clang/clang
 LLVM_LIB_OBJDIR=${TOOLS_OBJTOP}/libclang
 
 .include "${SRCDIR}/Makefile"
+
+.if ${HOST_OS} == Linux
+LDADD+=	-ldl
+.endif
