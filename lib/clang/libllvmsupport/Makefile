@@ -78,7 +78,6 @@ SRCS=	APFloat.cpp \
 	Twine.cpp \
 	Unicode.cpp \
 	Valgrind.cpp \
-	Watchdog.cpp \
 	YAMLParser.cpp \
 	YAMLTraits.cpp \
 	circular_raw_ostream.cpp \
@@ -97,7 +96,8 @@ SRCS+=	ARMWinEH.cpp \
 	FileOutputBuffer.cpp \
 	FileUtilities.cpp \
 	SystemUtils.cpp \
-	ThreadPool.cpp
+	ThreadPool.cpp \
+	Watchdog.cpp
 .endif
 
 .if ${MK_CLANG_EXTRAS} != "no" || ${MK_LLDB} != "no"

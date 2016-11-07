@@ -8,7 +8,7 @@
 #define BUG_REPORT_URL "http://llvm.org/bugs/"
 
 /* Define if you want backtraces on crash */
-#define ENABLE_BACKTRACES
+/* #undef ENABLE_BACKTRACES */
 
 /* Define to enable crash overrides */
 #define ENABLE_CRASH_OVERRIDES
