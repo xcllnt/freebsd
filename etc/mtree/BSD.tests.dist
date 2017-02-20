@@ -425,6 +425,10 @@
                     ..
                 ..
             ..
+            eli
+                pbkdf2
+                ..
+            ..
         ..
         kern
             acct
@@ -644,6 +648,8 @@
         ..
         soelim
         ..
+        tail
+        ..
         tar
         ..
         timeout
@@ -657,6 +663,8 @@
         uudecode
         ..
         uuencode
+        ..
+        uniq
         ..
         xargs
         ..
