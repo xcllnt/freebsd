@@ -328,8 +328,6 @@
         ..
         libnv
         ..
-        libpam
-        ..
         libproc
         ..
         librt
@@ -621,6 +619,8 @@
         gzip
         ..
         ident
+        ..
+        indent
         ..
         join
         ..
