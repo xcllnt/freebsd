@@ -289,7 +289,7 @@ __END_DECLS
  * if you trust the remote host to restrict these ports.
  *
  * The default range of ports and the high range can be changed by
- * sysctl(3).  (net.inet.ip.port{hi,low}{first,last}_auto)
+ * sysctl(3).  (net.inet.ip.portrange.{hi,low,}{first,last})
  *
  * Changing those values has bad security implications if you are
  * using a stateless firewall that is allowing packets outside of that
@@ -433,6 +433,8 @@ __END_DECLS
 #define	IP_BINDANY		24   /* bool: allow bind to any address */
 #define	IP_BINDMULTI		25   /* bool: allow multiple listeners on a tuple */
 #define	IP_RSS_LISTEN_BUCKET	26   /* int; set RSS listen bucket */
+#define	IP_ORIGDSTADDR		27   /* bool: receive IP dst addr/port w/dgram */
+#define	IP_RECVORIGDSTADDR      IP_ORIGDSTADDR
 
 /*
  * Options for controlling the firewall and dummynet.
@@ -631,6 +633,8 @@ int	getsourcefilter(int, uint32_t, struct sockaddr *, socklen_t,
 #define	IPCTL_FASTFORWARDING	14	/* use fast IP forwarding code */
 					/* 15, unused, was: IPCTL_KEEPFAITH  */
 #define	IPCTL_GIF_TTL		16	/* default TTL for gif encap packet */
+#define	IPCTL_INTRDQMAXLEN	17	/* max length of direct netisr queue */
+#define	IPCTL_INTRDQDROPS	18	/* number of direct netisr q drops */
 
 #endif /* __BSD_VISIBLE */
 
