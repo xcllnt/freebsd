@@ -1,4 +1,6 @@
 /*-
+ * SPDX-License-Identifier: BSD-4-Clause
+ *
  * Copyright (c) 1991 Regents of the University of California.
  * All rights reserved.
  * Copyright (c) 1994 John S. Dyson
@@ -1614,7 +1616,7 @@ free_pv_chunk(struct pv_chunk *pc)
 #if 0 /* TODO: For minidump */
 	dump_drop_page(m->phys_addr);
 #endif
-	vm_page_unwire(m, PQ_INACTIVE);
+	vm_page_unwire(m, PQ_NONE);
 	vm_page_free(m);
 }
 
