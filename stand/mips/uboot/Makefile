@@ -24,12 +24,12 @@ UBLDR_LOADADDR?=	0xffffffff80800000
 # Architecture-specific loader code
 SRCS=		start.S conf.c vers.c
 
-HELP_FILES+=	help.uboot ${BOOTSRC}/fdt/help.fdt
+HELP_FILES=	${.CURDIR}/help.uboot ${BOOTSRC}/fdt/help.fdt
 
 # Always add MI sources
 .include	"${BOOTSRC}/loader.mk"
 
-CFLAGS+=	-ffreestanding -msoft-float -g
+CFLAGS+=	-g
 
 LDFLAGS=	-nostdlib -static -T ${.CURDIR}/ldscript.${MACHINE_CPUARCH}
 

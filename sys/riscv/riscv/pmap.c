@@ -220,8 +220,6 @@ vm_offset_t virtual_avail;	/* VA of first avail page (after kernel bss) */
 vm_offset_t virtual_end;	/* VA of last avail page (end of kernel AS) */
 vm_offset_t kernel_vm_end = 0;
 
-struct msgbuf *msgbufp = NULL;
-
 vm_paddr_t dmap_phys_base;	/* The start of the dmap region */
 vm_paddr_t dmap_phys_max;	/* The limit of the dmap region */
 vm_offset_t dmap_max_addr;	/* The virtual address limit of the dmap */
@@ -1804,7 +1802,6 @@ pmap_remove(pmap_t pmap, vm_offset_t sva, vm_offset_t eva)
 	pd_entry_t *l1, *l2;
 	pt_entry_t l3_pte, *l3;
 	struct spglist free;
-	int anyvalid;
 
 	/*
 	 * Perform an unsynchronized read.  This is, however, safe.
@@ -1812,7 +1809,6 @@ pmap_remove(pmap_t pmap, vm_offset_t sva, vm_offset_t eva)
 	if (pmap->pm_stats.resident_count == 0)
 		return;
 
-	anyvalid = 0;
 	SLIST_INIT(&free);
 
 	rw_rlock(&pvh_global_lock);
@@ -1885,8 +1881,6 @@ pmap_remove(pmap_t pmap, vm_offset_t sva, vm_offset_t eva)
 	}
 	if (lock != NULL)
 		rw_wunlock(lock);
-	if (anyvalid)
-		pmap_invalidate_all(pmap);
 	rw_runlock(&pvh_global_lock);	
 	PMAP_UNLOCK(pmap);
 	pmap_free_zero_pages(&free);
@@ -2014,14 +2008,11 @@ pmap_protect(pmap_t pmap, vm_offset_t sva, vm_offset_t eva, vm_prot_t prot)
 				pmap_load_store(l3p, entry);
 				PTE_SYNC(l3p);
 				/* XXX: Use pmap_invalidate_range */
-				pmap_invalidate_page(pmap, va);
+				pmap_invalidate_page(pmap, sva);
 			}
 		}
 	}
 	PMAP_UNLOCK(pmap);
-
-	/* TODO: Only invalidate entries we are touching */
-	pmap_invalidate_all(pmap);
 }
 
 /*

@@ -21,11 +21,8 @@ SRCS=		start.S conf.c vers.c
 SRCS+=		ucmpdi2.c
 
 # Always add MI sources
-HELP_FILES=	# Disable
 .include	"${BOOTSRC}/loader.mk"
 .PATH:		${SYSDIR}/libkern
-
-CFLAGS+=	-ffreestanding
 
 LDFLAGS=	-nostdlib -static -T ${.CURDIR}/ldscript.powerpc
 

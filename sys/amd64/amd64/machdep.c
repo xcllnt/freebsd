@@ -184,8 +184,6 @@ struct init_ops init_ops = {
  */
 extern char kernphys[];
 
-struct msgbuf *msgbufp;
-
 /*
  * Physical address of the EFI System Table. Stashed from the metadata hints
  * passed into the kernel and used by the EFI code to call runtime services.
@@ -604,7 +602,6 @@ exec_setregs(struct thread *td, struct image_params *imgp, u_long stack)
 	regs->tf_fs = _ufssel;
 	regs->tf_gs = _ugssel;
 	regs->tf_flags = TF_HASSEGS;
-	td->td_retval[1] = 0;
 
 	/*
 	 * Reset the hardware debug registers if they were in use.

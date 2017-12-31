@@ -1,4 +1,6 @@
 /*-
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
  * Copyright (c) 1989, 1993
  *	The Regents of the University of California.  All rights reserved.
  *
@@ -329,7 +331,7 @@ nfsvno_pathconf(struct vnode *vp, int flag, register_t *retf,
 		 */
 		switch (flag) {
 		case _PC_LINK_MAX:
-			*retf = LINK_MAX;
+			*retf = NFS_LINK_MAX;
 			break;
 		case _PC_NAME_MAX:
 			*retf = NAME_MAX;

@@ -28,11 +28,10 @@ SRCS+=		ucmpdi2.c
 CFLAGS+=	-mcpu=powerpc64
 
 # Always add MI sources
-HELP_FILES=	# Disable
 .include	"${BOOTSRC}/loader.mk"
 .PATH:		${SYSDIR}/libkern
 
-CFLAGS+=	-Wall -ffreestanding -msoft-float -DAIM
+CFLAGS+=	-Wall -DAIM
 # load address. set in linker script
 RELOC?=		0x0
 CFLAGS+=	-DRELOC=${RELOC}
@@ -44,7 +43,5 @@ CFLAGS+= -Wa,-mppc64bridge
 
 DPADD=		${LIBFICL} ${LIBOFW} ${LIBFDT} ${LIBSA}
 LDADD=		${LIBFICL} ${LIBOFW} ${LIBFDT} ${LIBSA}
-
-HELP_FILES+=	${FDTSRC}/help.fdt
 
 .include <bsd.prog.mk>

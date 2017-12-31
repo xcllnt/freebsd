@@ -28,12 +28,10 @@ SRCS=		start.S conf.c self_reloc.c vers.c
 CWARNFLAGS.self_reloc.c+=	-Wno-error=maybe-uninitialized
 .endif
 
-HELP_FILES+=	 help.uboot ${BOOTSRC}/fdt/help.fdt
+HELP_FILES=	 ${.CURDIR}/help.uboot ${BOOTSRC}/fdt/help.fdt
 
 # Always add MI sources
 .include	"${BOOTSRC}/loader.mk"
-
-CFLAGS+=	-ffreestanding -msoft-float
 
 LDFLAGS=	-nostdlib -static -T ${.CURDIR}/ldscript.${MACHINE_CPUARCH}
 LDFLAGS+=	-Wl,-znotext

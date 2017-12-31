@@ -27,14 +27,13 @@ SRCS+=		ucmpdi2.c
 SRCS+=		ofwfdt.c
 .endif
 
-HELP_FILES+=	${FDTSRC}/help.fdt
+HELP_FILES=	${FDTSRC}/help.fdt
 
 # Always add MI sources
 .include	"${BOOTSRC}/loader.mk"
 
 .PATH:		${SYSDIR}/libkern
 
-CFLAGS+=	-ffreestanding -msoft-float
 # load address. set in linker script
 RELOC?=		0x1C00000
 CFLAGS+=	-DRELOC=${RELOC}
