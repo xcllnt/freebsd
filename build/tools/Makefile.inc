@@ -13,7 +13,10 @@ LLVM_TOOLS_CFLAGS= -I${TOOLS_SRCTOP}/include/${HOST_OS}
 CFLAGS+=	-D_GNU_SOURCE
 .endif
 
+.if !defined(LIB) || ${LIB} != netbsd
 LIBNETBSDDIR=	${TOOLS_OBJTOP}/libnetbsd
+.endif
+
 MK_DEBUG_FILES=	no
 WARNS=		0
 
