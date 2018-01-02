@@ -10,6 +10,10 @@
 
 .PATH:		${LLVM_SRCS}/${SRCDIR}
 
+.if defined(LLVM_TOOLS_CFLAGS)
+CFLAGS+=	${LLVM_TOOLS_CFLAGS}
+.endif
+
 CFLAGS+=	-I${SRCTOP}/lib/clang/include
 CFLAGS+=	-I${LLVM_SRCS}/include
 CFLAGS+=	-DLLVM_BUILD_GLOBAL_ISEL
@@ -42,7 +46,10 @@ CFLAGS+=	-DDEFAULT_SYSROOT=\"${TOOLS_PREFIX}\"
 
 CFLAGS+=	-ffunction-sections
 CFLAGS+=	-fdata-sections
+
+.if !defined(LLVM_TOOLS_CFLAGS)
 LDFLAGS+=	-Wl,--gc-sections
+.endif
 
 CXXFLAGS+=	-std=c++11
 CXXFLAGS+=	-fno-exceptions
