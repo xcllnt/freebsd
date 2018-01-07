@@ -1,5 +1,9 @@
 # $FreeBSD$
 
+.if defined(SRCDIR)
+.PATH: ${SRCDIR}
+.endif
+
 TOOLS_OBJTOP?=	${.OBJDIR:H}
 TOOLS_SRCTOP:=	${.PARSEDIR:tA}
 

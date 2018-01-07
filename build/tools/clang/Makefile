@@ -1,10 +1,10 @@
 # $FreeBSD$
 
 SRCDIR=	${SRCTOP}/usr.bin/clang/clang
-.PATH:	${SRCDIR}
 
-LLVM_LIB_OBJDIR=${TOOLS_OBJTOP}/libclang
+MK_CLANG_IS_CC=no
 
+.include "${.CURDIR:H}/Makefile.inc"
 .include "${SRCDIR}/Makefile"
 
 .if ${HOST_OS} == Linux

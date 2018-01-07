@@ -1,6 +1,7 @@
 # $FreeBSD$
 
 SUBDIR= \
+	clang \
 	clang-tblgen \
 	config \
 	file2c \
@@ -14,9 +15,6 @@ SUBDIR= \
 	llvm-tblgen \
 	makefs \
 	mkimg
-
-SUBDIR+=\
-	clang
 
 SUBDIR_DEPEND_clang=		libclang
 SUBDIR_DEPEND_clang-tblgen=	libllvmminimal
