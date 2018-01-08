@@ -2,7 +2,14 @@
 
 HOST_OS=$(shell uname -s)
 
-BMAKE?= bmake
+ifeq (${HOST_OS}, Darwin)
+NCPUS=	$(shell sysctl -n hw.ncpu)
+else
+.warning Don't know how many cores there are on this OS
+NCPUS=	1
+endif
+
+BMAKE?= env MAKEFLAGS= MAKELEVEL= MFLAGS= bmake -j${NCPUS}
 
 COMPILER_TYPE_Darwin=clang
 COMPILER_TYPE_$(HOST_OS)?=gcc
