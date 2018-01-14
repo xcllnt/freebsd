@@ -1,4 +1,12 @@
 # $FreeBSD$
+#
+# This makefile exists for those environments in which make
+# is the GNU make utility.  The primary function of this file
+# is to hand over the build to the portable BSD make utility,
+# which is commonly called bmake instead.
+# Additionally, this file could and should grow the support
+# for either installing pre-built versions of bmake or building
+# bmake from the version in the source tree.
 
 HOST_OS=$(shell uname -s)
 
