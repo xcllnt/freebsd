@@ -5,8 +5,7 @@ HOST_OS=$(shell uname -s)
 ifeq (${HOST_OS}, Darwin)
 NCPUS=	$(shell sysctl -n hw.ncpu)
 else
-.warning Don't know how many cores there are on this OS
-NCPUS=	1
+NCPUS=	$(shell grep '^processor' /proc/cpuinfo | wc -l)
 endif
 
 BMAKE?= env MAKEFLAGS= MAKELEVEL= MFLAGS= bmake -j${NCPUS}
