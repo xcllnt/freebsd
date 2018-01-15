@@ -2,7 +2,7 @@
 
 .include "${SRCTOP}/lib/clang/clang.pre.mk"
 
-.if defined(TOOLS_OBJTOP)
+.if defined(BUILDING_TOOLS)
 CFLAGS+=	-I${TOOLS_OBJTOP}/libclang
 CFLAGS+=	-I${TOOLS_OBJTOP}/libllvm
 .else
@@ -16,7 +16,7 @@ LIBDEPS+=	clang
 LIBDEPS+=	llvm
 
 .for lib in ${LIBDEPS}
-.if defined(TOOLS_OBJTOP)
+.if defined(BUILDING_TOOLS)
 LDADD+=		${TOOLS_OBJTOP}/lib${lib}/lib${lib}.a
 .else
 DPADD+=		${OBJTOP}/lib/clang/lib${lib}/lib${lib}.a
@@ -26,7 +26,7 @@ LDADD+=		${OBJTOP}/lib/clang/lib${lib}/lib${lib}.a
 
 PACKAGE=	clang
 
-.if defined(TOOLS_OBJTOP)
+.if defined(BUILDING_TOOLS)
 LIBADD+=	ncurses
 .else
 LIBADD+=	ncursesw
